@@ -1,0 +1,19 @@
+version: "3"
+services:
+  service:
+    build: .
+    volumes:
+      - ".:/escrow"
+    env_file: .env
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+  db:
+    image: postgres:12-alpine
+    ports:
+      - "5555:5432"
+    environment:
+      POSTGRES_DB: escrow
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user
